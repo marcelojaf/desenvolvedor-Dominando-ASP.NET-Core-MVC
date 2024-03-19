@@ -11,8 +11,8 @@
       "destination": "wwwroot/lib/jquery"
     },
     {
-      "library": "jquery-validation-unobstrusive@4.0.0",
-      "destination": "wwwroot/lib/jquery-validation-unobstrusive"
+      "library": "jquery-validation-unobtrusive@4.0.0",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive"
     }
   ]
 }
