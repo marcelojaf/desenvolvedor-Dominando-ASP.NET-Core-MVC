@@ -1,13 +1,12 @@
 ﻿@model AppSemTemplate.Models.Produto
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Produto";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div>
-    <h4>Produto</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -20,17 +19,21 @@
             @Html.DisplayNameFor(model => model.Imagem)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Imagem)
+            <img src="~/images/@Model.Imagem" alt="@Model.Imagem" style="width: 70px; height: 100px" />
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Valor)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
+            R$ @Html.DisplayFor(model => model.Valor)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+        <span class="fa fa-pencil-alt"></span> Editar
+    </a>
+    <a asp-action="Index" class="btn btn-secondary">
+        <span class="fa fa-arrow-left"></span> Voltar à Lista
+    </a>
 </div>

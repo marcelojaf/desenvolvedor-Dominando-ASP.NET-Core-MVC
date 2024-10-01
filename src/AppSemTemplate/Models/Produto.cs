@@ -10,13 +10,13 @@ namespace AppSemTemplate.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string? Nome { get; set; }
+        public string Nome { get; set; }
 
         [NotMapped]
         [DisplayName("Imagem do Produto")]
-        public IFormFile? ImagemUpload { get; set; }
+        public IFormFile ImagemUpload { get; set; }
 
-        public string? Imagem { get; set; }
+        public string Imagem { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public decimal Valor { get; set; }
