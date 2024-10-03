@@ -15,14 +15,16 @@ namespace AppSemTemplate.Extensions
     {
         // Injeção de dependência para acessar o contexto HTTP atual
         private readonly IHttpContextAccessor _contextAccessor;
+        private readonly LinkGenerator _linkGenerator;
 
         /// <summary>
         /// Construtor que injeta o IHttpContextAccessor.
         /// </summary>
         /// <param name="contextAccessor">Fornece acesso ao contexto HTTP atual.</param>
-        public BotaoTagHelper(IHttpContextAccessor contextAccessor)
+        public BotaoTagHelper(IHttpContextAccessor contextAccessor, LinkGenerator linkGenerator)
         {
             _contextAccessor = contextAccessor;
+            _linkGenerator = linkGenerator;
         }
 
         /// <summary>
@@ -75,11 +77,23 @@ namespace AppSemTemplate.Extensions
             // Obtém o nome do controller atual da rota
             var controller = _contextAccessor.HttpContext.GetRouteData().Values["controller"].ToString();
 
+            // Constrói a URL base (scheme + host)
+            var host = $"{_contextAccessor.HttpContext.Request.Scheme}://" +
+                $"{_contextAccessor.HttpContext.Request.Host.Value}";
+
+            // Gera o caminho relativo para a ação usando LinkGenerator
+            var indexPath = _linkGenerator.GetPathByAction(
+                _contextAccessor.HttpContext,
+                nomeAction,
+                controller,
+                values: new { id = RouteId }
+                )!;
+
             // Define o elemento de saída como uma âncora (link)
             output.TagName = "a";
 
-            // Define o atributo href com a URL da ação
-            output.Attributes.SetAttribute("href", $"{controller}/{nomeAction}/{RouteId}");
+            // Define o atributo href com a URL absoluta da ação
+            output.Attributes.SetAttribute("href", $"{host}{indexPath}");
 
             // Define a classe CSS do botão
             output.Attributes.SetAttribute("class", nomeClasse);
