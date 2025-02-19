@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AppSemTemplate.Data;
+﻿using AppSemTemplate.Data;
 using AppSemTemplate.Models;
 using AppSemTemplate.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppSemTemplate.Controllers
 {
+    [Authorize]
     [Route("meus-produtos")]
     public class ProdutosController : Controller
     {
@@ -23,7 +20,7 @@ namespace AppSemTemplate.Controllers
             _imageUploadService = imageUploadService;
         }
 
-        // GET: Produtos
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Produtos.ToListAsync());
@@ -123,6 +120,7 @@ namespace AppSemTemplate.Controllers
         }
 
         [Route("excluir/{id:int}")]
+        [Authorize(Policy = "PodeExcluirPermanentemente")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,6 +140,7 @@ namespace AppSemTemplate.Controllers
 
         [HttpPost("excluir/{id:int}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "PodeExcluirPermanentemente")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var produto = await _context.Produtos.FindAsync(id);
