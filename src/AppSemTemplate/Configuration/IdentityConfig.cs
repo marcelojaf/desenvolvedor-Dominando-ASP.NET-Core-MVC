@@ -17,6 +17,7 @@ namespace AppSemTemplate.Configuration
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("PodeExcluirPermanentemente", policy => policy.RequireRole("Amin"));
+                options.AddPolicy("VerProdutos", policy => policy.RequireClaim("Produtos", "VI"));
             });
 
             return builder;
