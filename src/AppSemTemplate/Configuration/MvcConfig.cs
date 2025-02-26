@@ -8,6 +8,13 @@ namespace AppSemTemplate.Configuration
     {
         public static WebApplicationBuilder AddMvcConfiguration(this WebApplicationBuilder builder)
         {
+            // 8:12
+            builder.Configuration
+                .SetBasePath(builder.Environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
             builder.Services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
