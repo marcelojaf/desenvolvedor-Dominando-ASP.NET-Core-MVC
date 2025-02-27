@@ -8,7 +8,6 @@ namespace AppSemTemplate.Configuration
     {
         public static WebApplicationBuilder AddMvcConfiguration(this WebApplicationBuilder builder)
         {
-            // 8:12
             builder.Configuration
                 .SetBasePath(builder.Environment.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
@@ -31,6 +30,10 @@ namespace AppSemTemplate.Configuration
                 options.ExcludedHosts.Add("example.com");
                 options.ExcludedHosts.Add("www.example.com");
             });
+
+            // Registrando a configuração do appsettings.json
+            builder.Services.Configure<ApiConfiguration>(
+                builder.Configuration.GetSection(ApiConfiguration.ConfigName));
 
             return builder;
         }
