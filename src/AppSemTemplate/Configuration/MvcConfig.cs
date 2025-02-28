@@ -1,6 +1,7 @@
 ﻿using AppSemTemplate.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace AppSemTemplate.Configuration
 {
@@ -12,7 +13,8 @@ namespace AppSemTemplate.Configuration
                 .SetBasePath(builder.Environment.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables()
+                .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 
             builder.Services.AddControllersWithViews(options =>
             {
@@ -42,10 +44,11 @@ namespace AppSemTemplate.Configuration
         {
             if (app.Environment.IsDevelopment())
             {
-
+                app.UseDeveloperExceptionPage();
             }
             else
             {
+                app.UseExceptionHandler("/erro/500");
                 app.UseHsts();
             }
 
