@@ -1,4 +1,5 @@
 ﻿using AppSemTemplate.Data;
+using AppSemTemplate.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -19,6 +20,7 @@ namespace AppSemTemplate.Configuration
             builder.Services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                options.Filters.Add(typeof(FiltroAuditoria));
             });
 
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -49,6 +51,7 @@ namespace AppSemTemplate.Configuration
             else
             {
                 app.UseExceptionHandler("/erro/500");
+                app.UseStatusCodePagesWithRedirects("/erro/{0}");
                 app.UseHsts();
             }
 
