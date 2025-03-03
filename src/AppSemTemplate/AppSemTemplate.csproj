@@ -12,7 +12,6 @@
     <Folder Include="Areas\Produtos\Models\" />
     <Folder Include="Areas\Vendas\Data\" />
     <Folder Include="Areas\Vendas\Models\" />
-    <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

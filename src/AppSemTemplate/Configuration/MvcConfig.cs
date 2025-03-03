@@ -21,6 +21,8 @@ namespace AppSemTemplate.Configuration
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 options.Filters.Add(typeof(FiltroAuditoria));
+
+                MvcOptionsConfig.ConfigurarMensagensDeModelBinding(options.ModelBindingMessageProvider);
             });
 
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -54,6 +56,8 @@ namespace AppSemTemplate.Configuration
                 app.UseStatusCodePagesWithRedirects("/erro/{0}");
                 app.UseHsts();
             }
+
+            app.UseGlobalizationConfig();
 
             app.UseHttpsRedirection();
 
