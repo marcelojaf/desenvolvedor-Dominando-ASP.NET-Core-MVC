@@ -11,6 +11,4 @@ var app = builder.Build();
 
 app.UseMvcConfiguration();
 
-app.MapRazorPages();
-
 app.Run();

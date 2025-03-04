@@ -1,4 +1,6 @@
-﻿using AppSemTemplate.Services;
+﻿using AppSemTemplate.Extensions;
+using AppSemTemplate.Services;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace AppSemTemplate.Configuration
 {
@@ -8,6 +10,9 @@ namespace AppSemTemplate.Configuration
         {
             builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            builder.Services.AddSingleton<IValidationAttributeAdapterProvider, MoedaValidationAttributeAdapterProvider>();
+
             return builder;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using AppSemTemplate.Extensions;
 
 namespace AppSemTemplate.Models
 {
@@ -18,6 +19,7 @@ namespace AppSemTemplate.Models
 
         public string Imagem { get; set; }
 
+        [Moeda]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public decimal Valor { get; set; }
 
