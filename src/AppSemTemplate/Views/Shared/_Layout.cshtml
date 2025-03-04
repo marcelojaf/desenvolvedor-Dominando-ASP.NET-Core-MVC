@@ -55,7 +55,8 @@
                     Seu site ASP.NET feito do jeito certo!!
                 </div>
                 <div class="text-end">
-                    Idioma Selecionado: @System.Globalization.CultureInfo.CurrentCulture.Name
+                    @* Idioma Selecionado: @System.Globalization.CultureInfo.CurrentCulture.Name *@
+                    <partial name="_SelectLanguagePartial"/>
                 </div>
             </div>
             <p>&copy; 2021 - AppSemTemplate </p>

@@ -1,6 +1,7 @@
 ﻿using AppSemTemplate.Data;
 using AppSemTemplate.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -23,7 +24,9 @@ namespace AppSemTemplate.Configuration
                 options.Filters.Add(typeof(FiltroAuditoria));
 
                 MvcOptionsConfig.ConfigurarMensagensDeModelBinding(options.ModelBindingMessageProvider);
-            });
+            })
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
