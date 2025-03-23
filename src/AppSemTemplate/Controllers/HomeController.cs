@@ -43,6 +43,11 @@ namespace AppSemTemplate.Controllers
 
             ViewData["Mensagem"] = _localizer["Seja bem vindo!"];
 
+            if (Request.Cookies.TryGetValue("MeuCookie", out string valor))
+            {
+                ViewData["MeuCookie"] = valor;
+            }
+
             return View();
         }
 
@@ -56,6 +61,19 @@ namespace AppSemTemplate.Controllers
             );
 
             return LocalRedirect(returnUrl);
+        }
+
+        [Route("cookies")]
+        public IActionResult Cookie()
+        {
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1)
+            };
+
+            Response.Cookies.Append("MeuCookie", "Dados do Cookie", cookieOptions);
+
+            return View();
         }
 
         [Route("teste")]
