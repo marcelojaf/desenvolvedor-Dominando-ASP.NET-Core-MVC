@@ -1,5 +1,6 @@
 ﻿using AppSemTemplate.Data;
 using AppSemTemplate.Extensions;
+using AppSemTemplate.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,8 @@ namespace AppSemTemplate.Configuration
             // Registrando a configuração do appsettings.json
             builder.Services.Configure<ApiConfiguration>(
                 builder.Configuration.GetSection(ApiConfiguration.ConfigName));
+
+            builder.Services.AddHostedService<ImageWatermarkService>();
 
             return builder;
         }
