@@ -50,7 +50,7 @@ namespace AppSemTemplate.Controllers
         [ClaimsAuthorize("Produtos", "AD")]
         public IActionResult CriarNovoProduto()
         {
-            return View("Create");
+            return View("Create", new Produto());
         }
 
         [HttpPost("criar-novo")]
